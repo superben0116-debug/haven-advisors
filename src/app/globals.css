@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette */
+  --color-prussian-50: #e8edf3;
+  --color-prussian-100: #c7d1df;
+  --color-prussian-200: #95a6be;
+  --color-prussian-300: #617a9b;
+  --color-prussian-400: #34527b;
+  --color-prussian-500: #1b365d;
+  --color-prussian-600: #162c4c;
+  --color-prussian-700: #112239;
+  --color-prussian-800: #0c182a;
+  --color-prussian-900: #070e18;
+
+  --color-forest-50: #ebf0ed;
+  --color-forest-100: #c8d6cf;
+  --color-forest-200: #95b0a3;
+  --color-forest-300: #5f8876;
+  --color-forest-400: #3d6653;
+  --color-forest-500: #2d4a3e;
+  --color-forest-600: #253d32;
+  --color-forest-700: #1c2e26;
+  --color-forest-800: #141f1a;
+  --color-forest-900: #0b110e;
+
+  --color-champagne-50: #fbf7ed;
+  --color-champagne-100: #f3e8c9;
+  --color-champagne-200: #e8d39c;
+  --color-champagne-300: #dbbd6e;
+  --color-champagne-400: #d0ae58;
+  --color-champagne-500: #c9a961;
+  --color-champagne-600: #b08d3e;
+  --color-champagne-700: #8a6e30;
+  --color-champagne-800: #645023;
+  --color-champagne-900: #3f3316;
+
+  --color-cream-50: #fefcf8;
+  --color-cream-100: #fbf6ea;
+  --color-cream-200: #f5efe6;
+  --color-cream-300: #ede3cf;
+  --color-cream-400: #e2d4b5;
+
+  --color-ink-50: #f7f8fa;
+  --color-ink-100: #eef0f4;
+  --color-ink-200: #d8dde5;
+  --color-ink-500: #5c6575;
+  --color-ink-700: #2c3442;
+  --color-ink-900: #141921;
+
+  /* Semantic aliases */
+  --color-background: var(--color-cream-100);
+  --color-foreground: var(--color-ink-900);
+  --color-muted-foreground: var(--color-ink-500);
+  --color-primary: var(--color-prussian-500);
+  --color-primary-foreground: var(--color-cream-100);
+  --color-accent: var(--color-champagne-500);
+  --color-accent-foreground: var(--color-prussian-700);
+  --color-border: var(--color-ink-200);
+
+  /* Fonts */
+  --font-sans: var(--font-inter), "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+
+  /* Shadows */
+  --shadow-soft: 0 1px 2px rgba(20, 25, 33, 0.04), 0 8px 24px rgba(20, 25, 33, 0.06);
+  --shadow-card: 0 4px 20px rgba(27, 54, 93, 0.08);
+  --shadow-lift: 0 12px 40px rgba(27, 54, 93, 0.18);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-feature-settings: "lnum" 1, "pnum" 1;
+  letter-spacing: -0.01em;
+}
+
+/* Smooth anchor scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-champagne-200);
+  color: var(--color-prussian-700);
+}
