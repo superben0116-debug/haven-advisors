@@ -1,6 +1,0 @@
-{
-  "build_command": "pnpm build",
-  "start_command": "pnpm start",
-  "install_command": "pnpm install --frozen-lockfile",
-  "node_version": "22"
-}
