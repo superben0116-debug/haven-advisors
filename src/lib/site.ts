@@ -1,5 +1,8 @@
-// Central content source for the MVP (will move to Payload CMS later).
-// Keeping it all in one file so Ben can eyeball structure and edit copy fast.
+// Static service data plus CMS-managed content files used by the operations console.
+import cmsContent from "@/content/site.json";
+
+export const seoConfig = cmsContent.seo;
+export const homeContent = cmsContent.home;
 
 export const siteConfig = {
   name: "栖美",
@@ -270,7 +273,7 @@ export const experts: Array<{
 
 export type BlogCategory = "攻略" | "案例" | "政策";
 
-export const blogPosts: Array<{
+export type BlogPost = {
   slug: string;
   title: string;
   excerpt: string;
@@ -280,66 +283,15 @@ export const blogPosts: Array<{
   cover: string;
   body: string; // Markdown-lite plain text for MVP
   author: string;
-}> = [
-  {
-    slug: "honest-visa-2026",
-    title: "2026 诚实签证：签证官真正在看的是什么",
-    excerpt:
-      "从近年面签反馈出发，拆解诚实签证下签证官关注的六个关键点，以及准爸妈最容易忽略的准备细节。",
-    category: "攻略",
-    publishedAt: "2026-04-12",
-    readMinutes: 8,
-    cover: "/images/blog-1.svg",
-    author: "林清和",
-    body: `# 2026 诚实签证：签证官真正在看的是什么
+  seoTitle?: string;
+  seoDescription?: string;
+  keywords?: string[];
+  status?: "draft" | "scheduled" | "published" | "failed";
+};
 
-\n
-签证官不是在找"赴美生子"这四个字，他们在找的是一个完整、可信、有回国约束的故事。\n
-\n## 一、行程的合理性\n
-为什么是现在？为什么是这个城市？为什么是这家月子中心？每一个选择都应该有自洽的理由。\n
-\n## 二、经济能力的匹配\n
-预算远超你日常消费水平的行程，会让签证官停下来。账户流水、纳税记录、工作证明，缺一不可。\n
-\n## 三、回国约束的真实\n
-国内的房、车、工作、长辈——这些不是道具，是你愿意回来的理由。面签时能真诚讲述的，才是有力的约束。\n
-\n（以下内容省略，正式版会由专家团队撰写完整长文。）`,
-  },
-  {
-    slug: "la-vs-ny-maternity",
-    title: "月子中心在加州还是纽约？一篇对比说清楚",
-    excerpt:
-      "气候、医疗资源、华人生态、成本结构，四个维度拆解加州和纽约的赴美生子选择。",
-    category: "攻略",
-    publishedAt: "2026-03-28",
-    readMinutes: 6,
-    cover: "/images/blog-2.svg",
-    author: "周安",
-    body: `# 月子中心在加州还是纽约？\n\n先说结论：如果家庭第一次赴美，加州更友好；如果医疗诉求很具体或事业已在纽约有基础，纽约更高效。\n\n## 气候\n加州冬天不冷、晒得到太阳，产后恢复对母亲的身心都更温和。\n\n## 医疗资源\n两地都有顶级的产科医院。纽约医学中心更密集，加州在"中文友好医生"数量上更多。\n\n（以下内容省略。）`,
-  },
-  {
-    slug: "case-bay-area-family",
-    title: "案例｜一位旧金山工程师家庭的五年规划",
-    excerpt:
-      "从 H-1B 到绿卡、从学区选择到保险配置，记录一个典型湾区中产家庭的五年 journey。",
-    category: "案例",
-    publishedAt: "2026-03-15",
-    readMinutes: 10,
-    cover: "/images/blog-3.svg",
-    author: "林清和",
-    body: `# 一位旧金山工程师家庭的五年规划\n\n（化名案例）\n\n张先生一家落地湾区时，孩子 4 岁，夫妻双方都持 H-1B。他们找到我们时，关心的问题并不复杂：\n\n1. 孩子的教育路径要怎么排？\n2. 房子要不要在绿卡前买？\n3. 保险配置从哪里开始？\n\n我们用了四次深度咨询完成了初步规划……\n\n（以下内容省略。）`,
-  },
-  {
-    slug: "policy-ssn-update",
-    title: "政策更新｜2026 年 SSN 申请流程调整",
-    excerpt:
-      "社安卡申请流程在 2026 年 Q1 有若干细微但关键的更新，涉及出生证明的提交方式。",
-    category: "政策",
-    publishedAt: "2026-02-22",
-    readMinutes: 4,
-    cover: "/images/blog-4.svg",
-    author: "Dr. Emily Chen",
-    body: `# 2026 年 SSN 申请流程调整\n\n2026 年 Q1，美国社安局对新生儿 SSN 申请流程做了以下调整：\n\n- 出生证明需在州卫生部加急通道办理\n- 社安局部分分局恢复线下预约\n\n（正式版会持续更新官方文件链接。）`,
-  },
-];
+export const blogPosts = cmsContent.blogPosts.filter(
+  (post) => post.status !== "draft" && post.status !== "scheduled"
+) as BlogPost[];
 
 export type CaseStudy = {
   slug: string;

@@ -19,8 +19,16 @@ export async function generateMetadata({ params }: Props) {
   const p = blogPosts.find((x) => x.slug === slug);
   if (!p) return {};
   return {
-    title: `${p.title} | 栖美 Haven Advisors`,
-    description: p.excerpt,
+    title: p.seoTitle || `${p.title} | 栖美 Haven Advisors`,
+    description: p.seoDescription || p.excerpt,
+    keywords: p.keywords,
+    openGraph: {
+      title: p.seoTitle || p.title,
+      description: p.seoDescription || p.excerpt,
+      images: [p.cover],
+      type: "article",
+      publishedTime: p.publishedAt,
+    },
   };
 }
 
