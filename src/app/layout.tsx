@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { seoConfig } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,22 +18,14 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "栖美 Haven Advisors — 赴美综合服务顾问",
-  description:
-    "栖美 Haven Advisors 为中国高净值家庭提供赴美生子、海外职业发展、名校教育规划、高端医疗预约、美国保险与理财的一站式顾问服务。",
-  keywords: [
-    "赴美生子",
-    "海外职业发展",
-    "名校教育规划",
-    "高端医疗预约",
-    "美国保险",
-    "海外理财",
-    "Haven Advisors",
-    "栖美",
-  ],
+  metadataBase: new URL(seoConfig.siteUrl || "https://havenadvisors.us"),
+  title: seoConfig.title,
+  description: seoConfig.description,
+  keywords: seoConfig.keywords,
   openGraph: {
-    title: "栖美 Haven Advisors",
-    description: "温馨人文 · 专业稳重的赴美综合服务顾问",
+    title: seoConfig.title,
+    description: seoConfig.description,
+    images: seoConfig.ogImage ? [seoConfig.ogImage] : undefined,
     type: "website",
     locale: "zh_CN",
   },

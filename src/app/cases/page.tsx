@@ -21,7 +21,7 @@ export default function CasesPage() {
               客户案例
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-ink-500">
-              以下案例均经当事家庭授权并脱敏呈现，使用化名。我们希望你从中看到的不是"成功学"，而是每个家庭真实面对的选择与权衡。
+              以下案例均经当事家庭授权并脱敏呈现，使用化名。我们希望你从中看到的不是&quot;成功学&quot;，而是每个家庭真实面对的选择与权衡。
             </p>
           </FadeIn>
         </Container>

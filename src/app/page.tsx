@@ -27,6 +27,7 @@ import {
   blogPosts,
   caseStudies,
   experts,
+  homeContent,
   services,
   siteConfig,
   stats,
@@ -46,6 +47,8 @@ export default function HomePage() {
   const latestPosts = [...blogPosts]
     .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1))
     .slice(0, 3);
+  const heroTitle = homeContent.title || "在美国的每一个人生节点，都值得一位可靠的同行者。";
+  const heroHighlight = homeContent.highlight || "人生节点";
 
   return (
     <>
@@ -53,7 +56,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden text-cream-100">
         <div className="absolute inset-0 -z-10">
           <Image
-            src="/images/hero-bg.svg"
+            src={homeContent.heroImage || "/images/hero-bg.svg"}
             alt=""
             fill
             priority
@@ -70,35 +73,40 @@ export default function HomePage() {
                 className="w-fit backdrop-blur-sm bg-champagne-100/25 border-champagne-300/40 text-champagne-200"
               >
                 <Sparkles className="h-3 w-3" />
-                自 {siteConfig.foundedYear} 年以来服务 380+ 中国家庭
+                {homeContent.eyebrow || `自 ${siteConfig.foundedYear} 年以来服务 380+ 中国家庭`}
               </Badge>
             </HeroItem>
 
             <HeroItem>
               <h1 className="font-display text-[44px] leading-[1.1] sm:text-6xl lg:text-7xl max-w-4xl">
-                在美国的每一个
-                <span className="text-champagne-400">人生节点</span>，
-                <br className="hidden sm:block" />
-                都值得一位可靠的同行者。
+                {heroTitle.includes(heroHighlight) ? (
+                  <>
+                    {heroTitle.split(heroHighlight)[0]}
+                    <span className="text-champagne-400">{heroHighlight}</span>
+                    {heroTitle.split(heroHighlight).slice(1).join(heroHighlight)}
+                  </>
+                ) : (
+                  heroTitle
+                )}
               </h1>
             </HeroItem>
 
             <HeroItem>
               <p className="max-w-2xl text-lg leading-relaxed text-cream-200/85 sm:text-xl">
-                栖美 Haven Advisors，为中国高净值家庭提供赴美生子、海外职业发展、名校教育规划、高端医疗预约、美国保险与理财的一站式顾问服务。
+                {homeContent.description}
               </p>
             </HeroItem>
 
             <HeroItem className="flex flex-col gap-4 sm:flex-row">
               <Link
-                href="/consultation"
+                href={homeContent.primaryCta?.href || "/consultation"}
                 className={buttonVariants({ variant: "secondary", size: "lg" })}
               >
-                预约付费咨询
+                {homeContent.primaryCta?.label || "预约付费咨询"}
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                href="/services"
+                href={homeContent.secondaryCta?.href || "/services"}
                 className={buttonVariants({
                   variant: "outline",
                   size: "lg",
@@ -106,7 +114,7 @@ export default function HomePage() {
                     "border-cream-200/50 text-cream-100 hover:bg-cream-100/10 hover:text-cream-100",
                 })}
               >
-                了解服务矩阵
+                {homeContent.secondaryCta?.label || "了解服务矩阵"}
               </Link>
             </HeroItem>
           </HeroStagger>
@@ -137,6 +145,41 @@ export default function HomePage() {
           </FadeIn>
         </Container>
       </section>
+
+      {homeContent.carousel?.length ? (
+        <section className="py-16 lg:py-20">
+          <Container>
+            <div className="grid gap-6 md:grid-cols-3">
+              {homeContent.carousel.map((slide, i) => (
+                <FadeIn key={slide.title} delay={i * 0.08}>
+                  <Link
+                    href={slide.href || "/services"}
+                    className="group block h-full overflow-hidden rounded-3xl border border-ink-200 bg-white transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(27,54,93,0.15)]"
+                  >
+                    <div className="relative aspect-[5/3] w-full overflow-hidden">
+                      <Image
+                        src={slide.image || "/images/hero-bg.svg"}
+                        alt={slide.title}
+                        fill
+                        sizes="(min-width: 768px) 33vw, 100vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <h2 className="font-display text-2xl text-prussian-700">
+                        {slide.title}
+                      </h2>
+                      <p className="mt-3 text-sm leading-relaxed text-ink-500">
+                        {slide.description}
+                      </p>
+                    </div>
+                  </Link>
+                </FadeIn>
+              ))}
+            </div>
+          </Container>
+        </section>
+      ) : null}
 
       {/* ------- Service matrix ------- */}
       <section className="py-24 lg:py-32">
